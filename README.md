@@ -1,8 +1,10 @@
-# Select2 Auto-Complete
+# Laravel Nova Select2 Auto-Complete
 
 ##### An auto-completing Laravel Nova search field.
 
 Provides a capability of auto-completed searching for results inside a select input field.
+
+Based on [SELECT2](https://select2.org) (The jQuery replacement for select boxes)
 
 ![Select2 Auto-Complete](./screenshot_1.png)
 
@@ -84,6 +86,10 @@ class Category extends Resource
              Select2::make('Parent category', 'category_id')
                  ->sortable()
                  ->options($categories)
+                 /**
+                  * Documentation
+                  * https://select2.org/configuration/options-api
+                  */
                  ->configuration([
                      'placeholder'             => __('Choose an option'),
                      'allowClear'              => true,
@@ -92,8 +98,7 @@ class Category extends Resource
  
              Text::make('Name')
                  ->sortable()
-                 ->rules('required', 'max:255')
-                 ->slug('Slug'),
+                 ->rules('required', 'max:255'),
  
              Text::make('Slug')
                  ->sortable()
