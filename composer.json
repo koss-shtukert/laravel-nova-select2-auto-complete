@@ -1,0 +1,29 @@
+{
+    "name": "koss-shtukert/laravel-nova-select2-auto-complete",
+    "description": "A Laravel Nova select2 auto complete field.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Koss\\LaravelNovaSelect2\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Koss\\LaravelNovaSelect2\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
