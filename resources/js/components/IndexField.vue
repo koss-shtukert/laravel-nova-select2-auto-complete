@@ -1,6 +1,6 @@
 <template>
     <router-link
-        v-if="field.value"
+        v-if="field.value && field.showAsLink"
         :to="{
             name: 'detail',
             params: {
@@ -13,6 +13,8 @@
         {{ parentFieldLabel }}
     </router-link>
 
+    <span v-else-if="field.value && !field.showAsLink" class="whitespace-no-wrap text-left">{{ parentFieldLabel }}</span>
+
     <span v-else class="whitespace-no-wrap text-left">&mdash;</span>
 </template>
 
@@ -20,9 +22,6 @@
     export default {
         props: ['resourceName', 'field'],
         computed: {
-            fieldLabel() {
-                return this.fieldName || this.field.name
-            },
             parentFieldLabel() {
                 let label = ''
 

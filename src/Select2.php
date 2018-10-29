@@ -43,4 +43,15 @@ class Select2 extends Select
             'config' => $config,
         ]);
     }
+
+    /**
+     * @param bool $value
+     * @return $this
+     */
+    public function showAsLink($value = true)
+    {
+        return $this->withMeta([
+            'showAsLink' => $value,
+        ]);
+    }
 }

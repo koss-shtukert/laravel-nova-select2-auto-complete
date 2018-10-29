@@ -1,3 +1,8 @@
+[![GitHub stars](https://img.shields.io/github/stars/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/network)
+[![GitHub issues](https://img.shields.io/github/issues/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/commits)
+
 # Laravel Nova Select2 Auto-Complete
 
 ##### An auto-completing Laravel Nova search field.
@@ -94,7 +99,8 @@ class Category extends Resource
                      'placeholder'             => __('Choose an option'),
                      'allowClear'              => true,
                      'minimumResultsForSearch' => 1
-                 ]),
+                 ])
+                 ->showAsLink(),//Show as link to resource in Index and Detail page
  
              Text::make('Name')
                  ->sortable()

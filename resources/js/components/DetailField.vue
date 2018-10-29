@@ -10,7 +10,7 @@
         <div class="w-3/4 py-4">
             <slot name="value">
                 <router-link
-                    v-if="field.value"
+                    v-if="field.value && field.showAsLink"
                     :to="{
                         name: 'detail',
                         params: {
@@ -22,6 +22,8 @@
                 >
                     {{ parentFieldLabel }}
                 </router-link>
+
+                <p v-else-if="field.value && !field.showAsLink">{{ parentFieldLabel }}</p>
 
                 <p v-else>&mdash;</p>
             </slot>
