@@ -10,7 +10,7 @@
         <div class="w-3/4 py-4">
             <slot name="value">
                 <router-link
-                    v-if="field.value && field.showAsLink"
+                    v-if="field.value && showAsLink"
                     :to="{
                         name: 'detail',
                         params: {
@@ -23,7 +23,7 @@
                     {{ parentFieldLabel }}
                 </router-link>
 
-                <p v-else-if="field.value && !field.showAsLink">{{ parentFieldLabel }}</p>
+                <p v-else-if="field.value && !showAsLink" v-html="nl2br(htmlEncode(parentFieldLabel))"></p>
 
                 <p v-else>&mdash;</p>
             </slot>
@@ -39,16 +39,43 @@
                 return this.fieldName || this.field.name
             },
             parentFieldLabel() {
-                let label = ''
+                if (this.field.config.multiple) {
+                    let labels = []
 
-                this.field.options.forEach((option) => {
-                    if (option.id === this.field.value) {
-                        label = option.text
-                    }
-                })
+                    this.field.options.forEach((option) => {
+                        if (this.field.value.indexOf(option.id) !== -1) {
+                            labels.push(option.text)
+                        }
+                    })
+                    return labels.join('\n')
 
-                return label
+                } else {
+                    let label = ''
+
+                    this.field.options.forEach((option) => {
+                        if (option.id === this.field.value) {
+                            label = option.text
+                        }
+                    })
+
+                    return label
+                }
             },
+            showAsLink() {
+                return this.field.showAsLink && !this.field.config.multiple
+            }
+        },
+
+        methods: {
+            htmlEncode (html) {
+                let txt = document.createElement("textarea")
+                txt.innerHTML = html
+                return txt.value
+            },
+
+            nl2br (text) {
+                return text.replace(/(?:\r\n|\r|\n)/g, '<br>')
+            }
         }
     }
 </script>
