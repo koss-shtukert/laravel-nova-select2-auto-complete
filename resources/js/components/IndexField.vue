@@ -31,7 +31,7 @@
                             labels.push(option.text)
                         }
                     })
-                    return labels.join('\n')
+                    return labels.join(',\n')
 
                 } else {
                     let label = ''
