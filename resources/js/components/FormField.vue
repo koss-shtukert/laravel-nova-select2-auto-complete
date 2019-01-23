@@ -55,7 +55,17 @@
              * Update the field's internal value.
              */
             handleChange(value) {
-                this.value = value
+                if (this.options.multiple) {
+                    value = isNaN(value) ? value : value * 1 // If number passed as string, convert to number
+                    const index = this.value.indexOf(value)
+                    if (index === -1) {
+                        this.value.push(value)
+                    } else {
+                        this.value.splice(index, 1)
+                    }
+                } else {
+                    this.value = value
+                }
             },
 
             makeSelect2() {
@@ -64,7 +74,18 @@
                 select2
                     .select2(this.options)
                 .on('select2:select', e => this.handleChange(e.params.data.id))
-                .on('select2:unselect', e => this.handleChange(0))
+                .on('select2:unselect', e => {
+                  if (this.options.multiple) {
+                    this.handleChange(e.params.data.id)
+                  } else {
+                    this.handleChange(0)
+                  }
+                })
+
+                // This is necessary to get a multiselect to show its selected values on initialization
+                if (this.options.multiple) {
+                  select2.val(this.value).trigger('change')
+                }
 
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {

@@ -44,7 +44,7 @@ use Koss\LaravelNovaSelect2\Select2;
 
 class Category extends Resource
 {
- /**
+    /**
       * The model the resource corresponds to.
       *
       * @var string
@@ -164,3 +164,65 @@ class Category extends Resource
      }
 }
 ```
+
+### Multiple Selection
+
+This package can also be used for multiple selection to handle a many-to-many relationship.
+
+Say you have a many-to-many relationship between Category and Item and you want to be able to select multiple items on the Category Update page. You can handle it as follows:
+
+```php
+class Category extends Model
+{
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
+    
+    ...
+    
+    public function getItemListAttribute()
+    {
+        return $this->items->pluck('id')->all();
+    }
+    
+    public function setItemListAttribute($value)
+    {
+        $items = explode(",", $value);
+        $this->items()->sync($items);
+    }
+}
+```
+
+```php
+class Category extends Resource
+{
+    //...
+
+    public function fields(Request $request)
+    {
+        //...
+        $items = Item::all()->pluck('name', 'id');
+        
+        return [
+            //...
+            Select2::make('Items', 'itemList')
+                ->sortable()
+                ->options($items)
+                /**
+                * Documentation
+                * https://select2.org/configuration/options-api
+                */
+                ->configuration([
+                    'placeholder'             => __('Choose options'),
+                    'allowClear'              => true,
+                    'minimumResultsForSearch' => 1,
+                    'multiple'                => true,
+                ]),
+            //...                        
+        ];
+    }
+}
+```
+
+Note: the showAsLink option does not currently work when the multiple configuration option is used.
