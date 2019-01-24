@@ -2,11 +2,11 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
             <select
-                ref="select2"
-                :id="field.attribute"
-                :class="errorClasses"
-                class="w-full form-control form-input form-input-bordered"
-                v-model="value">
+                    ref="select2"
+                    :id="field.attribute"
+                    :class="errorClasses"
+                    class="w-full form-control form-input form-input-bordered"
+                    v-model="value">
                 <slot></slot>
             </select>
         </template>
@@ -41,7 +41,11 @@
             setInitialValue() {
                 this.value = this.field.value || null
                 this.options = this.field.config
-                this.options.data = this.field.options
+                this.options.data = this.field.options.map(option => {
+                    option.selected = option.id == this.value
+
+                    return option
+                })
             },
 
             /**
@@ -74,18 +78,18 @@
 
                 select2
                     .select2(this.options)
-                .on('select2:select', e => this.handleChange(e.params.data.id))
-                .on('select2:unselect', e => {
-                  if (this.options.multiple) {
-                    this.handleChange(e.params.data.id)
-                  } else {
-                    this.handleChange(0)
-                  }
-                })
+                    .on('select2:select', e => this.handleChange(e.params.data.id))
+                    .on('select2:unselect', e => {
+                        if (this.options.multiple) {
+                            this.handleChange(e.params.data.id)
+                        } else {
+                            this.handleChange(0)
+                        }
+                    })
 
                 // This is necessary to get a multiselect to show its selected values on initialization
                 if (this.options.multiple) {
-                  select2.val(this.value).trigger('change')
+                    select2.val(this.value).trigger('change')
                 }
 
                 const observer = new MutationObserver((mutations) => {
