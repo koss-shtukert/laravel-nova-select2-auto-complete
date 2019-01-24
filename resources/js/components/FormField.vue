@@ -58,6 +58,7 @@
                 if (this.options.multiple) {
                     value = isNaN(value) ? value : value * 1 // If number passed as string, convert to number
                     const index = this.value.indexOf(value)
+
                     if (index === -1) {
                         this.value.push(value)
                     } else {
@@ -94,7 +95,7 @@
 
                             if (classValue.split(' ').includes('border-danger')) {
                                 select2.addClass('select2-hidden-accessible')
-                                $('.select2-container--default .select2-selection').css('border-color', '#e74444')
+                                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#e74444')
                             }
                         }
                     });
