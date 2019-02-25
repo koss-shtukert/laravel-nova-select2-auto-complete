@@ -1,14 +1,14 @@
 <template>
     <router-link
-        v-if="field.value && showAsLink"
-        :to="{
+            v-if="field.value && showAsLink"
+            :to="{
             name: 'detail',
             params: {
-                resourceName: resourceName,
+                resourceName: field.linkToResource || resourceName,
                 resourceId: field.value
             }
         }"
-        class="no-underline dim text-primary font-bold"
+            class="no-underline dim text-primary font-bold"
     >
         {{ parentFieldLabel }}
     </router-link>
@@ -31,14 +31,14 @@
                             labels.push(option.text)
                         }
                     })
-                    return labels.join(',\n')
 
+                    return labels.join(',\n')
                 } else {
                     let label = ''
 
                     this.field.options.forEach((option) => {
                         if (option.id === this.field.value) {
-                          label = option.text
+                            label = option.text
                         }
                     })
 
@@ -51,13 +51,15 @@
         },
 
         methods: {
-            htmlEncode (html) {
+            htmlEncode(html) {
                 let txt = document.createElement("textarea")
+
                 txt.innerHTML = html
+
                 return txt.value
             },
 
-            nl2br (text) {
+            nl2br(text) {
                 return text.replace(/(?:\r\n|\r|\n)/g, '<br>')
             }
         }

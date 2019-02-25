@@ -100,7 +100,14 @@ class Category extends Resource
                      'allowClear'              => true,
                      'minimumResultsForSearch' => 1
                  ])
-                 ->showAsLink(),//Show as link to resource in Index and Detail page
+                 /**
+                  * Show as link to resource on Index and Detail page
+                  *    
+                  * @param null|string 
+                  * Default: null
+                  * Which Model it should be linked as Resource
+                  */
+                 ->showAsLink(self::$model),
  
              Text::make('Name')
                  ->sortable()

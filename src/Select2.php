@@ -1,6 +1,8 @@
 <?php namespace Koss\LaravelNovaSelect2;
 
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Select;
+use ReflectionClass;
 
 /**
  * Class Select2
@@ -45,13 +47,20 @@ class Select2 extends Select
     }
 
     /**
-     * @param bool $value
-     * @return $this
+     * @param null $resource
+     * @return mixed
+     * @throws \ReflectionException
      */
-    public function showAsLink($value = true)
+    public function showAsLink($resource = null)
     {
+        if ($resource) {
+            $resource = new ReflectionClass($resource);
+            $resource = Str::lower(Str::plural($resource->getShortName()));
+        }
+
         return $this->withMeta([
-            'showAsLink' => $value,
+            'showAsLink'     => true,
+            'linkToResource' => $resource
         ]);
     }
 }
