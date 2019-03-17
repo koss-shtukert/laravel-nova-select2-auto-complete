@@ -14,7 +14,7 @@
                     :to="{
                         name: 'detail',
                         params: {
-                            resourceName: resourceName,
+                            resourceName: field.linkToResource || resourceName,
                             resourceId: field.value
                         }
                     }"
