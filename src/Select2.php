@@ -55,7 +55,7 @@ class Select2 extends Select
     {
         if ($resource) {
             $resource = new ReflectionClass($resource);
-            $resource = Str::lower(Str::plural($resource->getShortName()));
+            $resource = Str::lower(Str::plural(Str::kebab($resource->getShortName())));
         }
 
         return $this->withMeta([
