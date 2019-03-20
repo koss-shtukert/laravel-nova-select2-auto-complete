@@ -4,7 +4,7 @@
             <select
                     ref="select2"
                     :id="field.attribute"
-                    :class="errorClasses"
+                    :class="classList"
                     class="w-full form-control form-input form-input-bordered"
                     v-model="value">
                 <slot></slot>
@@ -30,8 +30,26 @@
             }
         },
 
+        computed: {
+            classList() {
+                return [this.errorClass].push('select2-hidden-accessible')
+            }
+        },
+
         mounted() {
             this.makeSelect2()
+        },
+
+        watch: {
+            errorClasses(value) {
+                const select2 = $(this.$refs.select2)
+
+                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#bacad6')
+
+                if (value.includes('border-danger')) {
+                    select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#e74444')
+                }
+            }
         },
 
         methods: {
@@ -91,23 +109,6 @@
                 if (this.options.multiple) {
                     select2.val(this.value).trigger('change')
                 }
-
-                const observer = new MutationObserver((mutations) => {
-                    mutations.forEach((mutation) => {
-                        if (mutation.attributeName === 'class') {
-                            let classValue = $(mutation.target).prop(mutation.attributeName)
-
-                            if (classValue.split(' ').includes('border-danger')) {
-                                select2.addClass('select2-hidden-accessible')
-                                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#e74444')
-                            }
-                        }
-                    });
-                });
-
-                observer.observe(select2[0], {
-                    attributes: true
-                });
             }
         },
     }
