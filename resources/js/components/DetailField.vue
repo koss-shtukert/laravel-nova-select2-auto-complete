@@ -3,28 +3,34 @@
         <div class="w-1/4 py-4">
             <slot>
                 <h4 class="font-normal text-80">
-                    {{ fieldLabel }}
+                    {{ field.name }}
                 </h4>
             </slot>
         </div>
         <div class="w-3/4 py-4">
             <slot name="value">
-                <router-link
-                    v-if="field.value && showAsLink"
-                    :to="{
-                        name: 'detail',
-                        params: {
-                            resourceName: field.linkToResource || resourceName,
-                            resourceId: field.value
-                        }
-                    }"
-                    class="no-underline dim text-primary font-bold"
-                >
-                    {{ parentFieldLabel }}
-                </router-link>
-
-                <p v-else-if="field.value && !showAsLink" v-html="nl2br(htmlEncode(parentFieldLabel))"></p>
-
+                <div v-if="field.value">
+                    <div v-for="option in field.options">
+                        <template v-if="field.showAsLink">
+                            <router-link
+                                    v-if="valueExist(field.value, option.id)"
+                                    :to="{
+                                        name: 'detail',
+                                        params: {
+                                            resourceName: field.linkToResource || resourceName,
+                                            resourceId: option.id
+                                        }
+                                    }"
+                                    class="no-underline dim text-primary font-bold"
+                            >
+                                {{ labelFor(option.text) }}
+                            </router-link>
+                        </template>
+                        <template v-else>
+                            <p v-if="valueExist(field.value, option.id)" class="text-left" v-html="labelFor(option)"></p>
+                        </template>
+                    </div>
+                </div>
                 <p v-else>&mdash;</p>
             </slot>
         </div>
@@ -34,47 +40,14 @@
 <script>
     export default {
         props: ['resource', 'resourceName', 'resourceId', 'field'],
-        computed: {
-            fieldLabel() {
-                return this.fieldName || this.field.name
-            },
-            parentFieldLabel() {
-                if (this.field.config.multiple) {
-                    let labels = []
-
-                    this.field.options.forEach((option) => {
-                        if (this.field.value.indexOf(option.id) !== -1) {
-                            labels.push(option.text)
-                        }
-                    })
-                    return labels.join(',\n')
-
-                } else {
-                    let label = ''
-
-                    this.field.options.forEach((option) => {
-                        if (option.id === this.field.value) {
-                            label = option.text
-                        }
-                    })
-
-                    return label
-                }
-            },
-            showAsLink() {
-                return this.field.showAsLink && !this.field.config.multiple
-            }
-        },
-
         methods: {
-            htmlEncode (html) {
-                let txt = document.createElement("textarea")
-                txt.innerHTML = html
-                return txt.value
+            labelFor(text) {
+                return text.replace(/(?:\r\n|\r|\n)/g, ' ')
             },
+            valueExist(fieldValue, optionValue) {
+                fieldValue = Array.isArray(fieldValue) ? fieldValue : [fieldValue]
 
-            nl2br (text) {
-                return text.replace(/(?:\r\n|\r|\n)/g, '<br>')
+                return fieldValue.indexOf(optionValue) !== -1
             }
         }
     }
