@@ -19,6 +19,20 @@ class Select2 extends Select
     public $component = 'select2';
 
     /**
+     * Select2 constructor.
+     *
+     * @param string      $name
+     * @param string|null $attribute
+     * @param mixed|null  $resolveCallback
+     */
+    public function __construct(string $name, ?string $attribute = null, ?mixed $resolveCallback = null)
+    {
+        parent::__construct($name, $attribute, $resolveCallback);
+
+        $this->setDefaultMeta();
+    }
+
+    /**
      * Set the options for the select menu.
      *
      * @param  array $options
@@ -61,6 +75,19 @@ class Select2 extends Select
         return $this->withMeta([
             'showAsLink'     => true,
             'linkToResource' => $resource
+        ]);
+    }
+
+    /**
+     * @return void
+     */
+    private function setDefaultMeta()
+    {
+        $this->withMeta([
+            'options'        => [],
+            'config'         => [],
+            'showAsLink'     => false,
+            'linkToResource' => null
         ]);
     }
 }
