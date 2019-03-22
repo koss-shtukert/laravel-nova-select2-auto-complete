@@ -48,6 +48,18 @@ class Select2 extends Select
     }
 
     /**
+     * Display values using their corresponding specified labels.
+     *
+     * @return $this
+     */
+    public function displayUsingLabels()
+    {
+        return $this->displayUsing(function ($value) {
+            return $value;
+        });
+    }
+
+    /**
      * Set the configuration for the select2.
      *
      * @param $config
