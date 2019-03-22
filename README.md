@@ -231,5 +231,3 @@ class Category extends Resource
     }
 }
 ```
-
-Note: the showAsLink option does not currently work when the multiple configuration option is used.
