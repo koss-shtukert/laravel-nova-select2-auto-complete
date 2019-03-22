@@ -27,7 +27,7 @@
                             </router-link>
                         </template>
                         <template v-else>
-                            <p v-if="valueExist(field.value, option.id)" class="text-left" v-html="labelFor(option)"></p>
+                            <p v-if="valueExist(field.value, option.id)" class="text-left" v-html="labelFor(option.text)"></p>
                         </template>
                     </div>
                 </div>

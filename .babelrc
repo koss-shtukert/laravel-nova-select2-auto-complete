@@ -1,0 +1,9 @@
+{
+    "plugins": ["transform-vue-jsx", "syntax-jsx", "transform-object-rest-spread"],
+    "presets": [],
+    "env": {
+        "test": {
+            "presets": [["env", { "targets": { "node": "current" } }]]
+        }
+    }
+}

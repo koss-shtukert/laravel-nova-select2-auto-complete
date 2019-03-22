@@ -2,6 +2,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/network)
 [![GitHub issues](https://img.shields.io/github/issues/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/koss-shtukert/laravel-nova-select2-auto-complete.svg?style=flat-square)](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/commits)
+[![Build Status](https://travis-ci.org/koss-shtukert/laravel-nova-select2-auto-complete.svg?branch=master)](https://travis-ci.org/koss-shtukert/laravel-nova-select2-auto-complete)
 
 # Laravel Nova Select2 Auto-Complete
 
