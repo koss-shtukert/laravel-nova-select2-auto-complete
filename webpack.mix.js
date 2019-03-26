@@ -6,3 +6,4 @@ mix.setPublicPath('dist')
     .autoload({
         jquery: ['$', 'window.jQuery', 'jQuery'],
     })
+    .version()

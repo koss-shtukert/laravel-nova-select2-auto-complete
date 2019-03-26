@@ -37,7 +37,7 @@
         "jest-mock-axios": "^2.1.11",
         "jest-serializer-vue": "^2.0.0",
         "jquery": "^3.3.1",
-        "laravel-mix": "^4.0.15",
+        "laravel-mix": "^2.1.14",
         "laravel-nova": "^1.0.8",
         "portal-vue": "^1.5.1",
         "resolve-url-loader": "^2.3.1",
