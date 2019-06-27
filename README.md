@@ -40,7 +40,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\Text;
 use Illuminate\Http\Request;
-use Koss\LaravelNovaSelect2\Select2;
+use KossShtukert\LaravelNovaSelect2\Select2;
 
 class Category extends Resource
 {

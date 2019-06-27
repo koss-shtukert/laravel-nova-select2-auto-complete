@@ -1,14 +1,11 @@
-<?php namespace Koss\LaravelNovaSelect2;
+<?php
+
+namespace KossShtukert\LaravelNovaSelect2;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 
-/**
- * Class FieldServiceProvider
- *
- * @package Koss\Select2
- */
 class FieldServiceProvider extends ServiceProvider
 {
     /**
@@ -19,8 +16,8 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('select2', __DIR__ . '/../dist/js/field.js');
-            Nova::style('select2', __DIR__ . '/../dist/css/field.css');
+            Nova::script('laravel-nova-select2', __DIR__.'/../dist/js/field.js');
+            Nova::style('laravel-nova-select2', __DIR__.'/../dist/css/field.css');
         });
     }
 

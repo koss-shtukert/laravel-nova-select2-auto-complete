@@ -3,15 +3,15 @@
         <div v-for="option in field.options">
             <template v-if="field.showAsLink">
                 <router-link
-                        v-if="valueExist(field.value, option.id)"
-                        :to="{
+                    v-if="valueExist(field.value, option.id)"
+                    :to="{
                             name: 'detail',
                             params: {
                                 resourceName: field.linkToResource || resourceName,
                                 resourceId: option.id
                             }
                         }"
-                        class="no-underline dim text-primary font-bold"
+                    class="no-underline dim text-primary font-bold"
                 >
                     {{ labelFor(option.text) }}
                 </router-link>
@@ -28,6 +28,9 @@
 <script>
     export default {
         props: ['resourceName', 'field'],
+        mounted() {
+            this.$ga.page('/index')
+        },
         methods: {
             labelFor(text) {
                 return text.replace(/(?:\r\n|\r|\n)/g, ' ')

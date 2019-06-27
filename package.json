@@ -7,75 +7,17 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "test": "jest",
-        "watch:test": "jest --watch"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@vue/test-utils": "^1.0.0-beta.29",
-        "babel-code-frame": "^6.26.0",
-        "babel-core": "^6.26.3",
-        "babel-helper-vue-jsx-merge-props": "^2.0.3",
-        "babel-jest": "^24.5.0",
-        "babel-loader": "^8.0.5",
-        "babel-plugin-check-es2015-constants": "^6.22.0",
-        "babel-plugin-istanbul": "^5.1.1",
-        "babel-plugin-syntax-dynamic-import": "^6.18.0",
-        "babel-plugin-syntax-jsx": "^6.18.0",
-        "babel-plugin-syntax-object-rest-spread": "^6.13.0",
-        "babel-plugin-transform-es2015-arrow-functions": "^6.22.0",
-        "babel-plugin-transform-es2015-block-scoped-functions": "^6.22.0",
-        "babel-plugin-transform-es2015-block-scoping": "^6.26.0",
-        "babel-plugin-transform-object-rest-spread": "^6.26.0",
-        "babel-plugin-transform-runtime": "^6.23.0",
-        "babel-plugin-transform-vue-jsx": "^3.7.0",
-        "babel-preset-env": "^1.6.1",
-        "babel-runtime": "^6.26.0",
         "cross-env": "^5.0.0",
-        "dotenv": "^7.0.0",
-        "jest": "^24.5.0",
-        "jest-mock-axios": "^2.1.11",
-        "jest-serializer-vue": "^2.0.0",
-        "jquery": "^3.3.1",
-        "laravel-mix": "^2.1.14",
-        "laravel-nova": "^1.0.8",
-        "portal-vue": "^1.5.1",
-        "resolve-url-loader": "^2.3.1",
-        "sass": "^1.17.3",
-        "sass-loader": "^7.1.0",
-        "select2": "^4.0.6-rc.1",
-        "vue-jest": "^3.0.4",
-        "vue-server-renderer": "^2.6.10",
-        "vue-template-compiler": "^2.6.10"
+        "laravel-mix": "^1.0",
+        "laravel-nova": "^1.0",
+        "select2": "^4.0.7",
+        "jquery": "^3.4.0",
+        "vue-analytics": "^5.17.0"
     },
     "dependencies": {
-        "vue": "^2.6.10"
-    },
-    "jest": {
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$",
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "vue"
-        ],
-        "transform": {
-            "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-            ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
-        },
-        "snapshotSerializers": [
-            "<rootDir>/node_modules/jest-serializer-vue"
-        ],
-        "collectCoverage": false,
-        "collectCoverageFrom": [
-            "**/*.{js,vue}",
-            "!**/node_modules/**"
-        ],
-        "coverageReporters": [
-            "html",
-            "text-summary"
-        ],
-        "moduleNameMapper": {
-            "^@/(.*)$": "<rootDir>/resources/js/$1"
-        }
+        "vue": "^2.5.0"
     }
 }

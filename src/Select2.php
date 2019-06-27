@@ -1,4 +1,6 @@
-<?php namespace Koss\LaravelNovaSelect2;
+<?php
+
+namespace KossShtukert\LaravelNovaSelect2;
 
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Select;
@@ -7,7 +9,7 @@ use ReflectionClass;
 /**
  * Class Select2
  *
- * @package Koss\Select2
+ * @package KossShtukert\LaravelNovaSelect2
  */
 class Select2 extends Select
 {
@@ -16,16 +18,16 @@ class Select2 extends Select
      *
      * @var string
      */
-    public $component = 'select2';
+    public $component = 'laravel-nova-select2';
 
     /**
      * Select2 constructor.
      *
-     * @param string      $name
-     * @param string|null $attribute
-     * @param mixed|null  $resolveCallback
+     * @param               $name
+     * @param null          $attribute
+     * @param callable|null $resolveCallback
      */
-    public function __construct(string $name, ?string $attribute = null, ?mixed $resolveCallback = null)
+    public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
@@ -35,7 +37,7 @@ class Select2 extends Select
     /**
      * Set the options for the select menu.
      *
-     * @param  array $options
+     * @param array $options
      * @return $this
      */
     public function options($options)

@@ -2,11 +2,11 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
             <select
-                    ref="select2"
-                    :id="field.attribute"
-                    :class="classList"
-                    class="w-full form-control form-input form-input-bordered"
-                    v-model="value">
+                ref="select2"
+                :id="field.attribute"
+                :class="classList"
+                class="w-full form-control form-input form-input-bordered"
+                v-model="value">
                 <slot></slot>
             </select>
         </template>
@@ -19,9 +19,7 @@
 
     export default {
         mixins: [FormField, HandlesValidationErrors],
-
         props: ['resourceName', 'resourceId', 'field'],
-
         data() {
             return {
                 options: {
@@ -29,17 +27,15 @@
                 }
             }
         },
-
         computed: {
             classList() {
                 return [this.errorClass].push('select2-hidden-accessible')
             }
         },
-
         mounted() {
             this.makeSelect2()
+            this.$ga.page('/form')
         },
-
         watch: {
             errorClasses(value) {
                 const select2 = $(this.$refs.select2)
@@ -51,7 +47,6 @@
                 }
             }
         },
-
         methods: {
             /*
              * Set the initial, internal value for the field.

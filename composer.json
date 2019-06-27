@@ -1,6 +1,6 @@
 {
-    "name": "koss-shtukert/laravel-nova-select2-auto-complete",
-    "description": "A Laravel Nova select2 auto complete field.",
+    "name": "koss-shtukert/laravel-nova-select2",
+    "description": "A Laravel Nova field.",
     "keywords": [
         "laravel",
         "nova"
@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Koss\\LaravelNovaSelect2\\": "src/"
+            "KossShtukert\\LaravelNovaSelect2\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Koss\\LaravelNovaSelect2\\FieldServiceProvider"
+                "KossShtukert\\LaravelNovaSelect2\\FieldServiceProvider"
             ]
         }
     },
