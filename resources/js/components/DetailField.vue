@@ -41,7 +41,9 @@
     export default {
         props: ['resource', 'resourceName', 'resourceId', 'field'],
         mounted() {
-            this.$ga.page('/detail')
+            if (this.field.config && !this.field.config.disableGoogleAnalytics) {
+                this.$ga.page('/detail')
+            }
         },
         methods: {
             labelFor(text) {
