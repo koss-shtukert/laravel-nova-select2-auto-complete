@@ -172,7 +172,7 @@ class Category extends Resource
 }
 ```
 
-### Multiple Selection
+## Multiple Selection
 
 This package can also be used for multiple selection to handle a many-to-many relationship.
 
@@ -226,6 +226,32 @@ class Category extends Resource
                     'minimumResultsForSearch' => 1,
                     'multiple'                => true,
                 ]),
+            //...                        
+        ];
+    }
+}
+```
+
+## Google Analytics
+
+Google Analytics was **enabled** by default. 
+Use `disableGoogleAnalytics` method to disable it.
+
+```php
+class Category extends Resource
+{
+    //...
+
+    public function fields(Request $request)
+    {
+        //...
+        $items = Item::all()->pluck('name', 'id');
+        
+        return [
+            //...
+            Select2::make('Items', 'itemList')
+                ->sortable()
+                ->disableGoogleAnalytics(),
             //...                        
         ];
     }

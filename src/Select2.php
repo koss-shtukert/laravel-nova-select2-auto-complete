@@ -2,7 +2,10 @@
 
 namespace KossShtukert\LaravelNovaSelect2;
 
+use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Fields\Select;
 use ReflectionClass;
 
@@ -62,6 +65,17 @@ class Select2 extends Select
     }
 
     /**
+     * @param Closure|bool $callback
+     * @return Select2|Select
+     */
+    public function readonly($callback = true)
+    {
+        $this->readonlyCallback = $callback;
+
+        return $this->configuration(['disabled' => (bool)$this->readonlyCallback]);
+    }
+
+    /**
      * Set the configuration for the select2.
      *
      * @param $config
@@ -70,7 +84,7 @@ class Select2 extends Select
     public function configuration($config)
     {
         return $this->withMeta([
-            'config' => $config,
+            'config' => array_merge(Arr::get($this->meta(), 'config', []), $config),
         ]);
     }
 
@@ -90,6 +104,15 @@ class Select2 extends Select
             'showAsLink'     => true,
             'linkToResource' => $resource
         ]);
+    }
+
+    /**
+     * @param bool $state
+     * @return Select2
+     */
+    public function disableGoogleAnalytics(bool $state = true)
+    {
+        return $this->configuration(['disableGoogleAnalytics' => $state]);
     }
 
     /**

@@ -2,11 +2,11 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
             <select
-                ref="select2"
-                :id="field.attribute"
-                :class="classList"
-                class="w-full form-control form-input form-input-bordered"
-                v-model="value">
+                    ref="select2"
+                    :id="field.attribute"
+                    :class="classList"
+                    class="w-full form-control form-input form-input-bordered"
+                    v-model="value">
                 <slot></slot>
             </select>
         </template>
@@ -34,7 +34,10 @@
         },
         mounted() {
             this.makeSelect2()
-            this.$ga.page('/form')
+
+            if (this.field.config && !this.field.config.disableGoogleAnalytics) {
+                this.$ga.page('/form')
+            }
         },
         watch: {
             errorClasses(value) {
