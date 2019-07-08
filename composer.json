@@ -9,9 +9,6 @@
     "require": {
         "php": ">=7.1.0"
     },
-    "suggest": {
-        "v1.13": "Are not compatible with the previous version. Please see the release notes"
-    },
     "autoload": {
         "psr-4": {
             "KossShtukert\\LaravelNovaSelect2\\": "src/"
