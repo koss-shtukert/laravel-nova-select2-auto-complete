@@ -2,11 +2,11 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
             <select
-                    ref="select2"
-                    :id="field.attribute"
-                    :class="classList"
-                    class="w-full form-control form-input form-input-bordered"
-                    v-model="value">
+                ref="select2"
+                :id="field.attribute"
+                :class="classList"
+                class="w-full form-control form-input form-input-bordered"
+                v-model="value">
                 <slot></slot>
             </select>
         </template>
@@ -55,10 +55,10 @@
              * Set the initial, internal value for the field.
              */
             setInitialValue() {
-                this.value = this.field.value || null
                 this.options = this.field.config
+                this.value = this.field.value ? this.field.value : this.options.multiple ? [] : null
                 this.options.data = this.field.options.map(option => {
-                    option.selected = option.id == this.value
+                    option.selected = this.options.multiple ? this.value.indexOf(option.id) : this.value = option.id
 
                     return option
                 })
@@ -75,6 +75,8 @@
              * Update the field's internal value.
              */
             handleChange(value) {
+                this.value = value
+
                 if (this.options.multiple) {
                     value = isNaN(value) ? value : value * 1 // If number passed as string, convert to number
                     const index = this.value.indexOf(value)
@@ -84,8 +86,6 @@
                     } else {
                         this.value.splice(index, 1)
                     }
-                } else {
-                    this.value = value
                 }
             },
 
