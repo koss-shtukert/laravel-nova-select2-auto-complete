@@ -75,8 +75,6 @@
              * Update the field's internal value.
              */
             handleChange(value) {
-                this.value = value;
-
                 if (this.options.multiple) {
                     value = isNaN(value) ? value : value * 1; // If number passed as string, convert to number
                     const index = this.value.indexOf(value);
@@ -86,6 +84,8 @@
                     } else {
                         this.value.splice(index, 1)
                     }
+                } else {
+                    this.value = value;
                 }
             },
 
