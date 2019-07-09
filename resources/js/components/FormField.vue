@@ -41,9 +41,9 @@
         },
         watch: {
             errorClasses(value) {
-                const select2 = $(this.$refs.select2)
+                const select2 = $(this.$refs.select2);
 
-                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#bacad6')
+                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#bacad6');
 
                 if (value.includes('border-danger')) {
                     select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#e74444')
@@ -55,10 +55,10 @@
              * Set the initial, internal value for the field.
              */
             setInitialValue() {
-                this.options = this.field.config
-                this.value = this.field.value ? this.field.value : this.options.multiple ? [] : null
+                this.options = this.field.config;
+                this.value = this.field.value ? this.field.value : this.options.multiple ? [] : null;
                 this.options.data = this.field.options.map(option => {
-                    option.selected = this.options.multiple ? this.value.indexOf(option.id) : this.value = option.id
+                    option.selected = this.options.multiple ? this.value.indexOf(option.id) !== -1 : this.value === option.id;
 
                     return option
                 })
@@ -75,11 +75,11 @@
              * Update the field's internal value.
              */
             handleChange(value) {
-                this.value = value
+                this.value = value;
 
                 if (this.options.multiple) {
-                    value = isNaN(value) ? value : value * 1 // If number passed as string, convert to number
-                    const index = this.value.indexOf(value)
+                    value = isNaN(value) ? value : value * 1; // If number passed as string, convert to number
+                    const index = this.value.indexOf(value);
 
                     if (index === -1) {
                         this.value.push(value)
@@ -90,7 +90,7 @@
             },
 
             makeSelect2() {
-                const select2 = $(this.$refs.select2)
+                const select2 = $(this.$refs.select2);
 
                 select2
                     .select2(this.options)

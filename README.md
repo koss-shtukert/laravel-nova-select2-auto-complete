@@ -27,4 +27,4 @@ composer require koss-shtukert/laravel-nova-select2-auto-complete
 
 ## Documentation
 
-Please vision on [Wiki page](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/wiki) 
+Please visit on [Wiki page](https://github.com/koss-shtukert/laravel-nova-select2-auto-complete/wiki) 
