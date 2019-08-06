@@ -2,11 +2,11 @@
     <default-field :field="field" :errors="errors">
         <template slot="field">
             <select
-                ref="select2"
-                :id="field.attribute"
-                :class="classList"
-                class="w-full form-control form-input form-input-bordered"
-                v-model="value">
+                    ref="select2"
+                    :id="field.attribute"
+                    :class="classList"
+                    class="w-full form-control form-input form-input-bordered"
+                    v-model="value">
                 <slot></slot>
             </select>
         </template>
@@ -41,9 +41,9 @@
         },
         watch: {
             errorClasses(value) {
-                const select2 = $(this.$refs.select2);
+                const select2 = $(this.$refs.select2)
 
-                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#bacad6');
+                select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#bacad6')
 
                 if (value.includes('border-danger')) {
                     select2.parent().find('.select2-container--default .select2-selection').css('border-color', '#e74444')
@@ -55,10 +55,10 @@
              * Set the initial, internal value for the field.
              */
             setInitialValue() {
-                this.options = this.field.config;
-                this.value = this.field.value ? this.field.value : this.options.multiple ? [] : null;
+                this.value = this.getValue()
+                this.options = this.field.config
                 this.options.data = this.field.options.map(option => {
-                    option.selected = this.options.multiple ? this.value.indexOf(option.id) !== -1 : this.value === option.id;
+                    option.selected = this.options.multiple ? this.value.indexOf(option.id) !== -1 : this.value === option.id
 
                     return option
                 })
@@ -76,8 +76,8 @@
              */
             handleChange(value) {
                 if (this.options.multiple) {
-                    value = isNaN(value) ? value : value * 1; // If number passed as string, convert to number
-                    const index = this.value.indexOf(value);
+                    value = isNaN(value) ? value : value * 1 // If number passed as string, convert to number
+                    const index = this.value.indexOf(value)
 
                     if (index === -1) {
                         this.value.push(value)
@@ -85,12 +85,12 @@
                         this.value.splice(index, 1)
                     }
                 } else {
-                    this.value = value;
+                    this.value = value
                 }
             },
 
             makeSelect2() {
-                const select2 = $(this.$refs.select2);
+                const select2 = $(this.$refs.select2)
 
                 select2
                     .select2(this.options)
@@ -107,7 +107,18 @@
                 if (this.options.multiple) {
                     select2.val(this.value).trigger('change')
                 }
-            }
+            },
+
+            /**
+             * @returns {*}
+             */
+            getValue() {
+                let value = Array.isArray(this.field.value) ? this.field.value : this.field.value ? [this.field.value] : []
+                let valueEmpty = value.length ? false : true
+                let defaultValue = this.field.config.defaultValue ? (this.field.config.multiple ? this.field.config.defaultValue : this.field.config.defaultValue[0]) : (this.field.config.multiple ? [] : null)
+
+                return valueEmpty ? defaultValue : this.field.value
+            },
         },
     }
 </script>
