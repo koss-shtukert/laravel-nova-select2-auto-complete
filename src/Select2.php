@@ -76,6 +76,17 @@ class Select2 extends Select
     }
 
     /**
+     * @param null $value
+     * @return $this
+     */
+    public function default($value = null)
+    {
+        $this->configuration(['defaultValue' => is_array($value) ? $value : [$value]]);
+
+        return $this;
+    }
+
+    /**
      * Set the configuration for the select2.
      *
      * @param $config
