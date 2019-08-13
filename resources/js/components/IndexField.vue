@@ -28,11 +28,6 @@
 <script>
     export default {
         props: ['resourceName', 'field'],
-        mounted() {
-            if (this.field.config && !this.field.config.disableGoogleAnalytics) {
-                this.$ga.page('/index')
-            }
-        },
         methods: {
             labelFor(text) {
                 return text.replace(/(?:\r\n|\r|\n)/g, ' ')

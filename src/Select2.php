@@ -40,11 +40,15 @@ class Select2 extends Select
     /**
      * Set the options for the select menu.
      *
-     * @param array $options
+     * @param array|\Closure $options
      * @return $this
      */
     public function options($options)
     {
+        if (is_callable($options)) {
+            $options = $options();
+        }
+
         return $this->withMeta([
             'options' => collect($options ?? [])->map(function ($label, $value) {
                 return ['text' => $label, 'id' => $value];
@@ -115,15 +119,6 @@ class Select2 extends Select
             'showAsLink'     => true,
             'linkToResource' => $resource
         ]);
-    }
-
-    /**
-     * @param bool $state
-     * @return Select2
-     */
-    public function disableGoogleAnalytics(bool $state = true)
-    {
-        return $this->configuration(['disableGoogleAnalytics' => $state]);
     }
 
     /**

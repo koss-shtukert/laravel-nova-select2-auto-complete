@@ -34,10 +34,6 @@
         },
         mounted() {
             this.makeSelect2()
-
-            if (this.field.config && !this.field.config.disableGoogleAnalytics) {
-                this.$ga.page('/form')
-            }
         },
         watch: {
             errorClasses(value) {
