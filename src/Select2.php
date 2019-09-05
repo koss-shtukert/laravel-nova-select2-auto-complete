@@ -42,9 +42,10 @@ class Select2 extends Select
      *
      * @param array|\Closure $options
      * @param boolean $optgroups
+     * @param integer|null $selected
      * @return $this
      */
-    public function options($options, $optgroups = false)
+    public function options($options, $optgroups = false, $selected = null )
     {
         if (is_callable($options)) {
             $options = $options();
@@ -52,14 +53,23 @@ class Select2 extends Select
 
         if ( $optgroups == true ) {
             return $this->withMeta([
-                'options' => collect($options ?? [])->map(function ($group) {
+                'options' => collect($options ?? [])->map(function ( $group ) use ( $selected ) {
                     return [
                         'text' => $group['text'] ?? 'no label',
-                        'children' => collect( $group['children'] ?? [] )->map(function($child){
-                            return [
-                                'id' => $child['id'] ?? null,
-                                'text' => $child['text'] ?? 'no label'
-                            ];
+                        'children' => collect( $group['children'] ?? [] )->map(function( $child ) use ( $selected ) {
+                            if ( isset( $child['id'] ) && $child['id'] == $selected )
+                            {
+                                return [
+                                    'id' => $child['id'] ?? null,
+                                    'text' => $child['text'] ?? 'no label',
+                                    'selected' => true
+                                ];
+                            } else {
+                                return [
+                                    'id' => $child['id'] ?? null,
+                                    'text' => $child['text'] ?? 'no label'
+                                ];
+                            }
                         })->values()->all()
                     ];
                 })->values()->all(),
