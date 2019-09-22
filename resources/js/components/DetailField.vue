@@ -11,23 +11,47 @@
             <slot name="value">
                 <div v-if="field.value">
                     <div v-for="option in field.options">
-                        <template v-if="field.showAsLink">
-                            <router-link
-                                v-if="valueExist(field.value, option.id)"
-                                :to="{
+                        <template v-if="field.config.optgroup">
+                            <div v-for="children in field.options.children">
+                                <template v-if="field.showAsLink">
+                                    <router-link
+                                            v-if="valueExist(field.value, children.id)"
+                                            :to="{
+                                        name: 'detail',
+                                        params: {
+                                            resourceName: field.linkToResource || resourceName,
+                                            resourceId: children.id
+                                        }
+                                    }"
+                                            class="no-underline dim text-primary font-bold"
+                                    >
+                                        {{ labelFor(children.text) }}
+                                    </router-link>
+                                </template>
+                                <template v-else>
+                                    <p v-if="valueExist(field.value, children.id)" class="text-left" v-html="labelFor(children.text)"></p>
+                                </template>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <template v-if="field.showAsLink">
+                                <router-link
+                                        v-if="valueExist(field.value, option.id)"
+                                        :to="{
                                         name: 'detail',
                                         params: {
                                             resourceName: field.linkToResource || resourceName,
                                             resourceId: option.id
                                         }
                                     }"
-                                class="no-underline dim text-primary font-bold"
-                            >
-                                {{ labelFor(option.text) }}
-                            </router-link>
-                        </template>
-                        <template v-else>
-                            <p v-if="valueExist(field.value, option.id)" class="text-left" v-html="labelFor(option.text)"></p>
+                                        class="no-underline dim text-primary font-bold"
+                                >
+                                    {{ labelFor(option.text) }}
+                                </router-link>
+                            </template>
+                            <template v-else>
+                                <p v-if="valueExist(field.value, option.id)" class="text-left" v-html="labelFor(option.text)"></p>
+                            </template>
                         </template>
                     </div>
                 </div>

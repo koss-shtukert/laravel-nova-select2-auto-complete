@@ -41,50 +41,41 @@ class Select2 extends Select
      * Set the options for the select menu.
      *
      * @param array|\Closure $options
-     * @param boolean $optgroups
-     * @param integer|null $selected
+     * @param boolean        $optgroup
      * @return $this
      */
-    public function options($options, $optgroups = false, $selected = null )
+    public function options($options, $optgroup = false)
     {
         if (is_callable($options)) {
             $options = $options();
         }
 
-        if ( $optgroups == true ) {
+        $this->configuration(['optgroup' => $optgroup]);
+
+        if ($optgroup) {
             return $this->withMeta([
-                'options' => collect($options ?? [])->map(function ( $group ) use ( $selected ) {
+                'options' => collect($options ?? [])->map(function ($group) {
                     return [
-                        'text' => $group['text'] ?? 'no label',
-                        'children' => collect( $group['children'] ?? [] )->map(function( $child ) use ( $selected ) {
-                            if ( isset( $child['id'] ) && $child['id'] == $selected )
-                            {
-                                return [
-                                    'id' => $child['id'] ?? null,
-                                    'text' => $child['text'] ?? 'no label',
-                                    'selected' => true
-                                ];
-                            } else {
-                                return [
-                                    'id' => $child['id'] ?? null,
-                                    'text' => $child['text'] ?? 'no label'
-                                ];
-                            }
+                        'text'     => Arr::get($group, 'text', 'No label'),
+                        'children' => collect(Arr::get($group, 'children', []))->map(function ($child) {
+                            return [
+                                'id'   => Arr::get($child, 'id'),
+                                'text' => Arr::get($child, 'text', 'No label')
+                            ];
                         })->values()->all()
                     ];
                 })->values()->all(),
             ]);
-        } else {
-            return $this->withMeta([
-                'options' => collect($options ?? [])->map(function ($label, $value) {
-                    return [
-                        'text' => $label,
-                        'id' => $value
-                    ];
-                })->values()->all(),
-            ]);
         }
-        
+
+        return $this->withMeta([
+            'options' => collect($options ?? [])->map(function ($label, $value) {
+                return [
+                    'text' => $label,
+                    'id'   => $value
+                ];
+            })->values()->all(),
+        ]);
     }
 
     /**

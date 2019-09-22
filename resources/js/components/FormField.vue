@@ -54,6 +54,14 @@
                 this.value = this.getValue()
                 this.options = this.field.config
                 this.options.data = this.field.options.map(option => {
+                    if (this.options.optgroup) {
+                        this.field.options.children.map(children => {
+                            children.selected = this.options.multiple ? this.value.indexOf(children.id) !== -1 : this.value === children.id
+
+                            return children
+                        })
+                    }
+
                     option.selected = this.options.multiple ? this.value.indexOf(option.id) !== -1 : this.value === option.id
 
                     return option
