@@ -41,35 +41,30 @@ class Select2 extends Select
      * Set the options for the select menu.
      *
      * @param array|\Closure $options
-     * @param boolean        $optgroup
      * @return $this
      */
-    public function options($options, $optgroup = false)
+    public function options($options)
     {
         if (is_callable($options)) {
             $options = $options();
         }
 
-        $this->configuration(['optgroup' => $optgroup]);
+        return $this->withMeta([
+            'options' => collect($options ?? [])->map(function ($label, $value) {
+                if (Arr::has($value, 'children')) {
+                    $this->configuration(['optgroup' => true]);
 
-        if ($optgroup) {
-            return $this->withMeta([
-                'options' => collect($options ?? [])->map(function ($group) {
                     return [
-                        'text'     => Arr::get($group, 'text', 'No label'),
-                        'children' => collect(Arr::get($group, 'children', []))->map(function ($child) {
+                        'text'     => Arr::get($label),
+                        'children' => collect(Arr::get($value, 'children', []))->map(function ($childLabel, $childValue) {
                             return [
-                                'id'   => Arr::get($child, 'id'),
-                                'text' => Arr::get($child, 'text', 'No label')
+                                'text' => $childLabel,
+                                'id'   => $childValue
                             ];
                         })->values()->all()
                     ];
-                })->values()->all(),
-            ]);
-        }
+                }
 
-        return $this->withMeta([
-            'options' => collect($options ?? [])->map(function ($label, $value) {
                 return [
                     'text' => $label,
                     'id'   => $value
