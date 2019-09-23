@@ -50,12 +50,12 @@ class Select2 extends Select
         }
 
         return $this->withMeta([
-            'options' => collect($options ?? [])->map(function ($label, $value) {
+            'options' => collect($options ?? [])->map(function ($value, $keyOrLabel) {
                 if (is_array($value)) {
                     $this->configuration(['optgroup' => true]);
 
                     return [
-                        'text'     => $label,
+                        'text'     => $keyOrLabel,
                         'children' => collect($value ?? [])->map(function ($childLabel, $childValue) {
                             return [
                                 'text' => $childLabel,
@@ -66,8 +66,8 @@ class Select2 extends Select
                 }
 
                 return [
-                    'text' => $label,
-                    'id'   => $value
+                    'text' => $value,
+                    'id'   => $keyOrLabel
                 ];
             })->values()->all(),
         ]);

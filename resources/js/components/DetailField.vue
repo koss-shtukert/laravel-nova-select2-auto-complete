@@ -12,7 +12,7 @@
                 <div v-if="field.value">
                     <div v-for="option in field.options">
                         <template v-if="field.config.optgroup">
-                            <div v-for="children in field.options.children">
+                            <div v-for="children in option.children">
                                 <template v-if="field.showAsLink">
                                     <router-link
                                             v-if="valueExist(field.value, children.id)"

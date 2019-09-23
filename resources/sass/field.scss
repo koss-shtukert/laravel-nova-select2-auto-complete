@@ -1,96 +1,100 @@
 @import "~select2/dist/css/select2";
 
 .select2-container--default {
-    background-color: white;
-    border: none;
-    border-radius: .5rem;
+  background-color: white;
+  border: none;
+  border-radius: .5rem;
 
-    &.select2-container--open,
-    &.select2-container--focus,
-    &:focus {
-        outline: none;
-        box-shadow: 0 0 8px #4099de;
-    }
+  &.select2-container--open,
+  &.select2-container--focus,
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 8px #4099de;
+  }
 
-    &.select2-container--open {
-        .select2-selection--single {
-            border-radius: .5rem;
-        }
-    }
-
+  &.select2-container--open {
     .select2-selection--single {
-        &:focus {
+      border-radius: .5rem;
+    }
+  }
+
+  .select2-selection--single {
+    &:focus {
+      outline: none;
+    }
+
+    border: 1px solid #bacad6;
+    border-radius: .5rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    color: #7c858e;
+    box-shadow: none;
+    height: 2.25rem;
+    line-height: normal;
+
+    .select2-selection__rendered {
+      color: #7c858e;
+      padding: 2px 10px 0 0;
+
+      .select2-selection__clear {
+        color: black;
+      }
+    }
+
+    .select2-selection__arrow {
+      top: 5px;
+    }
+  }
+
+  .select2-dropdown {
+    &.select2-dropdown--below,
+    &.select2-dropdown--above {
+      border: 1px solid #bacad6;
+      border-radius: .5rem;
+      color: #7c858e;
+      margin-top: .25rem;
+      margin-bottom: .25rem;
+
+      .select2-search {
+        &.select2-search--dropdown {
+          padding: .5rem;
+        }
+
+        .select2-search__field {
+          border-radius: .5rem;
+          color: #7c858e;
+          padding-left: .75rem;
+          padding-right: .75rem;
+          height: 2.25rem;
+
+          &:focus {
             outline: none;
+          }
         }
+      }
 
-        border: 1px solid #bacad6;
-        border-radius: .5rem;
-        padding-left: .75rem;
-        padding-right: .75rem;
-        color: #7c858e;
-        box-shadow: none;
-        height: 2.25rem;
-        line-height: normal;
+      .select2-results {
+        .select2-results__options {
+          border-bottom-right-radius: .5rem;
+          border-bottom-left-radius: .5rem;
 
-        .select2-selection__rendered {
-            color: #7c858e;
-            padding: 2px 10px 0 0;
+          .select2-results__option {
+            background-color: white;
+            padding: .5rem 1rem;
+          }
 
-            .select2-selection__clear {
-                color: black;
-            }
+          .select2-results__option--highlighted {
+            background-color: #4099de;
+          }
         }
-
-        .select2-selection__arrow {
-            top: 5px;
-        }
+      }
     }
-
-    .select2-dropdown {
-        &.select2-dropdown--below {
-            border: 1px solid #bacad6;
-            border-radius: .5rem;
-            color: #7c858e;
-            margin-top: .25rem;
-            margin-bottom: .25rem;
-
-            .select2-search {
-                &.select2-search--dropdown {
-                    padding: .5rem;
-                }
-
-                .select2-search__field {
-                    border: none;
-                    padding: 0 .5rem;
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-            }
-
-            .select2-results {
-                .select2-results__options {
-                    border-bottom-right-radius: .5rem;
-                    border-bottom-left-radius: .5rem;
-
-                    .select2-results__option {
-                        background-color: white;
-                        padding: .5rem 1rem;
-                    }
-
-                    .select2-results__option--highlighted {
-                        background-color: #4099de;
-                    }
-                }
-            }
-        }
-    }
+  }
 }
 
 .select2-container--default.select2-container--open.select2-container--above .select2-selection--single,
 .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple,
 .select2-container--default.select2-container--open.select2-container--below .select2-selection--single,
 .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
-    border-radius: .5rem;
+  border-radius: .5rem;
 }
