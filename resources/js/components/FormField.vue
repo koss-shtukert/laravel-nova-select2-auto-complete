@@ -35,6 +35,9 @@
         mounted() {
             this.makeSelect2()
         },
+        beforeDestroy() {
+            this.destroySelect2()
+        },
         watch: {
             errorClasses(value) {
                 const select2 = $(this.$refs.select2)
@@ -111,6 +114,12 @@
                 if (this.options.multiple) {
                     select2.val(this.value).trigger('change')
                 }
+            },
+
+            destroySelect2() {
+                const select2 = $(this.$refs.select2)
+
+                select2.select2('destroy')
             },
 
             /**
