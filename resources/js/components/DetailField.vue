@@ -9,7 +9,7 @@
         </div>
         <div class="w-3/4 py-4">
             <slot name="value">
-                <div v-if="field.value">
+                <div v-if="!isEmpty(field.value)">
                     <div v-for="option in field.options">
                         <template v-if="field.config.optgroup">
                             <div v-for="children in option.children">
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+    import isEmpty from '../helpers'
+
     export default {
         props: ['resource', 'resourceName', 'resourceId', 'field'],
         methods: {
@@ -72,6 +74,9 @@
                 fieldValue = Array.isArray(fieldValue) ? fieldValue : [fieldValue]
 
                 return fieldValue.indexOf(optionValue) !== -1
+            },
+            isEmpty(value) {
+                return isEmpty(value)
             }
         }
     }

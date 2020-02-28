@@ -16,6 +16,7 @@
 <script>
     import 'select2/dist/js/select2.full.min'
     import {FormField, HandlesValidationErrors} from 'laravel-nova'
+    import isEmpty from '../helpers'
 
     export default {
         mixins: [FormField, HandlesValidationErrors],
@@ -126,12 +127,30 @@
              * @returns {*}
              */
             getValue() {
-                let value = Array.isArray(this.field.value) ? this.field.value : this.field.value ? [this.field.value] : []
-                let valueEmpty = value.length ? false : true
+                let value = this.__composeValue(this.field.value)
                 let defaultValue = this.field.config.defaultValue ? (this.field.config.multiple ? this.field.config.defaultValue : this.field.config.defaultValue[0]) : (this.field.config.multiple ? [] : null)
 
-                return valueEmpty ? defaultValue : this.field.value
+                return value.length ? this.field.value : defaultValue
             },
+
+            /**
+             * @param value
+             * @returns {[]}
+             * @private
+             */
+            __composeValue(value) {
+                let composedValue = []
+
+                if (Array.isArray(value)) {
+                    composedValue = value
+                } else {
+                    if (!isEmpty(value)) {
+                        composedValue = [value]
+                    }
+                }
+
+                return composedValue
+            }
         },
     }
 </script>
