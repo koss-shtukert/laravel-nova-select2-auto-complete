@@ -95,6 +95,8 @@
                 } else {
                     this.value = value
                 }
+
+                Nova.$emit(`${this.field.attribute}-change`, this.value)
             },
 
             makeSelect2() {
